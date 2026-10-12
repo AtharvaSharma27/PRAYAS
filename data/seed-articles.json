@@ -1,0 +1,50 @@
+[
+  {
+    "id": "art-1",
+    "title": "How DNS Resolves Domain Names",
+    "topic": "Networking",
+    "difficulty": "easy",
+    "wordCount": 215,
+    "text": "The Domain Name System (DNS) functions as the phonebook of the modern Internet, translating human-friendly hostnames into machine-routable IP addresses. Whenever a user types a web address into a browser, an intricate resolution journey initiates behind the scenes. First, the operating system checks its local cache. If the address is absent, a query travels to a recursive DNS resolver, typically maintained by an Internet service provider or cloud resolver network. The recursive resolver systematically queries the hierarchical DNS infrastructure. It contacts a root nameserver, which directs the inquiry to the appropriate Top-Level Domain (TLD) server responsible for extensions like .com or .org. The TLD server responds with the authoritative nameserver holding the precise resource records for the queried domain. Finally, the recursive resolver queries this authoritative nameserver, retrieves the definitive IP address, caches it locally according to the record's Time-To-Live (TTL) value, and returns the result to the client's browser. Caching at multiple architectural layers minimizes query latency and prevents global root server saturation. Understanding this multi-step lookup sequence is fundamental for diagnosing web connectivity failures, configuring CDN edge routing, and securing distributed web infrastructure."
+  },
+  {
+    "id": "art-2",
+    "title": "Understanding Event Loops in JavaScript",
+    "topic": "Web Architecture",
+    "difficulty": "medium",
+    "wordCount": 238,
+    "text": "JavaScript executes code on a single thread with a single call stack, meaning it can only process one synchronous operation at any given moment. To prevent long-running tasks like network requests or file access from freezing the entire user interface, JavaScript relies on an asynchronous runtime environment governed by the Event Loop. When an asynchronous operation is triggered, the runtime delegates the background execution to browser Web APIs or Node.js C++ bindings. Once the background work concludes, its callback is placed into one of two primary queues: the microtask queue or the macrotask queue. Microtasks include Promise resolutions, queueMicrotask callbacks, and MutationObserver events. Macrotasks encompass setTimeout timers, setInterval callbacks, and I/O handlers. The event loop continuously monitors the call stack. Whenever the call stack empties completely, the event loop prioritizes and exhausts all pending microtasks before executing a single macrotask from the queue. This strict operational order explains why resolved Promise handlers always run prior to timer callbacks, even timers set with a duration of zero milliseconds. Mastering the event loop enables software engineers to prevent frame drops, optimize rendering responsiveness, and avoid subtle race conditions in modern reactive web applications."
+  },
+  {
+    "id": "art-3",
+    "title": "The Raft Consensus Algorithm",
+    "topic": "Distributed Systems",
+    "difficulty": "hard",
+    "wordCount": 262,
+    "text": "In distributed computing, achieving consensus across independent nodes subject to network partitions and hardware failures is a fundamental challenge. The Raft consensus algorithm was formulated as a more understandable and verifiable alternative to classical Paxos. Raft decomposes the consensus problem into three distinct, decoupled sub-problems: leader election, log replication, and state safety. A Raft cluster designates each node as a leader, follower, or candidate. System time is divided into arbitrary terms identified by monotonic integers. During normal operations, a single elected leader accepts client requests, appends log entries, and orchestrates log replication to all follower nodes. If followers stop receiving periodic heartbeat signals from the leader before an randomized election timeout expires, a follower transitions into candidate status, increments the term number, and initiates a leader election. Other nodes grant votes based on candidate log up-to-dateness. A candidate becomes the new leader upon securing a majority quorum of cluster votes. The elected leader then propagates entries to followers; once an entry is replicated across a majority of nodes, it is committed and applied to the finite state machine. By enforcing strict leader completeness and randomized election timeouts, Raft guarantees data consistency, prevents split-brain anomalies, and ensures high availability in mission-critical distributed data stores like etcd and CockroachDB."
+  },
+  {
+    "id": "art-4",
+    "title": "Database Indexing with B-Trees",
+    "topic": "Databases",
+    "difficulty": "medium",
+    "wordCount": 224,
+    "text": "Relational databases deliver sub-millisecond query responses across tables containing millions of rows primarily due to database indexing. Without an index, evaluating a query with filtering criteria necessitates a full table scan, reading every disk block sequentially with O(N) complexity. The dominant data structure powering relational indexes is the balanced search tree, specifically the B+ Tree. Unlike binary trees, B+ Trees are self-balancing multi-way trees with large branching factors, optimized for block storage architectures. Internal nodes store keys purely for navigation, directing search paths down to leaf nodes. All actual data pointers or clustered row data reside exclusively in leaf nodes, which are linked together in a doubly-linked list. This architecture ensures tree depth remains minimal—frequently three to four levels for millions of records—greatly reducing physical disk I/O operations. Point lookups operate in logarithmic O(log N) time, while range queries execute efficiently by traversing the leaf-level linked list directly. However, indexing introduces a trade-off: every insert, update, and delete operation requires tree rebalancing and page splits, adding write overhead. Engineers must strategically design composite indexes based on query access patterns to balance read acceleration against write latency."
+  },
+  {
+    "id": "art-5",
+    "title": "Attention Mechanisms in Transformer Models",
+    "topic": "Machine Learning",
+    "difficulty": "hard",
+    "wordCount": 255,
+    "text": "The advent of the Transformer architecture revolutionized modern natural language processing by replacing recurrent neural networks (RNNs) with self-attention mechanisms. Traditional sequential models processed tokens one by one, creating computational bottlenecks and struggling to retain long-range context across extensive text sequences. Attention mechanisms eliminate these sequential constraints by calculating direct relational dependencies between every token pair in an input sequence simultaneously. In self-attention, each token embedding is transformed through learned projection matrices into three distinct vectors: Query (Q), Key (K), and Value (V). The relevance or compatibility score between tokens is computed by taking the dot product of the Query with all Keys, scaling the product by the square root of the key dimension to prevent gradient saturation, and applying a softmax activation. This yields an attention weight distribution indicating how much focus each token should assign to every other token. Finally, the attention weights are multiplied by the Value vectors to produce contextualized token representations. Multi-head attention expands this capability by running multiple projection spaces in parallel, allowing the model to jointly attend to semantic relationships, syntactic dependencies, and positional references. By enabling parallel training across GPUs, Transformers established the foundational backbone for contemporary large language models."
+  },
+  {
+    "id": "art-6",
+    "title": "Cross-Site Scripting (XSS) Defenses",
+    "topic": "Cybersecurity",
+    "difficulty": "easy",
+    "wordCount": 218,
+    "text": "Cross-Site Scripting (XSS) remains one of the most prevalent vulnerabilities affecting client-side web applications. XSS occurs when an application injects untrusted, unescaped user input directly into the Document Object Model (DOM), allowing attackers to execute arbitrary JavaScript in the victim's browser context. Attackers can leverage this execution privilege to hijack authenticated sessions, steal sensitive session tokens, redirect users to phishing portals, or deface websites. Mitigating XSS requires a defense-in-depth posture combining multiple security layers. First, user inputs must always be contextualized and sanitized. Modern web frameworks like React automatically escape text rendered within JSX templates, transforming dangerous characters like angle brackets into safe HTML entities. Second, developers should implement a rigorous Content Security Policy (CSP) via HTTP response headers. CSP restricts the domains from which scripts can be loaded and prohibits inline script execution (`unsafe-inline`) and `eval()`. Third, developers must store sensitive authorization tokens inside `HttpOnly` and `SameSite` cookies, rendering them inaccessible to malicious client scripts even if an injection vulnerability occurs. By integrating context-aware encoding, strict CSP directives, and secure cookie storage, web applications build robust resilience against malicious script injections."
+  }
+]
