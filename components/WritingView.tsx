@@ -183,7 +183,7 @@ export function WritingView({
         {/* Form */}
         <form onSubmit={handleFormSubmit} className="space-y-4">
           <div>
-            <div className="flex items-center justify-between mb-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1.5 mb-2">
               <label
                 htmlFor="summary-textarea"
                 className="block text-xs font-semibold uppercase tracking-wider text-slate-700 dark:text-slate-300"
@@ -221,7 +221,7 @@ export function WritingView({
             <button
               type="submit"
               disabled={!isValid || isEvaluating}
-              className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-600/20 disabled:opacity-50 disabled:pointer-events-none transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 shrink-0"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-600/20 disabled:opacity-50 disabled:pointer-events-none transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 shrink-0"
               aria-label="Submit summary for evaluation"
             >
               <span>Submit Summary</span>

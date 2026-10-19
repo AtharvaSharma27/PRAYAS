@@ -15,7 +15,6 @@ import {
   ListPlus,
   Cpu,
   Clock,
-  AlertTriangle,
 } from 'lucide-react';
 
 interface ResultViewProps {
@@ -212,45 +211,34 @@ export function ResultView({
             <span>Response time: {result.latencyMs} ms</span>
           </span>
         </div>
-
-        {/* Flagged notice */}
-        {result.needsReview && (
-          <span
-            className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-400 border border-amber-200 dark:border-amber-800"
-            title="Marked for secondary educator inspection"
-          >
-            <AlertTriangle className="w-3.5 h-3.5" />
-            <span>Flagged for review</span>
-          </span>
-        )}
       </div>
 
       {/* Primary Action Buttons */}
-      <div className="flex flex-wrap items-center justify-center gap-4">
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4">
         <button
           onClick={() => setIsRevealDrawerOpen(true)}
           type="button"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
-          <BookOpen className="w-4 h-4 text-indigo-500" />
+          <BookOpen className="w-4 h-4 text-indigo-500 shrink-0" />
           <span>Reveal Article & Compare</span>
         </button>
 
         <button
           onClick={onRetryArticle}
           type="button"
-          className="inline-flex items-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl text-sm font-semibold bg-white dark:bg-slate-800 text-slate-800 dark:text-white border border-slate-200 dark:border-slate-700 hover:border-indigo-400 hover:bg-slate-50 dark:hover:bg-slate-700/60 shadow-sm transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="w-4 h-4 shrink-0" />
           <span>Retry This Article</span>
         </button>
 
         <button
           onClick={onTryAnother}
           type="button"
-          className="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-600/20 transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold bg-indigo-600 text-white hover:bg-indigo-700 shadow-md shadow-indigo-600/20 transition-all focus-visible:ring-2 focus-visible:ring-indigo-500"
         >
-          <ListPlus className="w-4 h-4" />
+          <ListPlus className="w-4 h-4 shrink-0" />
           <span>Try Another Article</span>
         </button>
       </div>

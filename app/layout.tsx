@@ -1,7 +1,13 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Navbar } from '@/components/Navbar';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+};
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -43,22 +49,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 transition-colors duration-200">
+      <body className="min-h-full flex flex-col bg-slate-50 text-slate-900 transition-colors duration-200 overflow-x-hidden max-w-full">
         <Navbar />
-        <main className="flex-1 flex flex-col">{children}</main>
-        <footer className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 bg-white/80 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>
-              GistCheck · Problem Statement{' '}
-              <span className="font-semibold text-indigo-600">
-                PRAYAS-INFO-26-S-007
-              </span>
-            </p>
-            <p className="flex items-center gap-2">
-              <span>UN Sustainable Development Goal 4: Quality Education</span>
-            </p>
-          </div>
-        </footer>
+        <main className="flex-1 flex flex-col overflow-x-hidden max-w-full">{children}</main>
       </body>
     </html>
   );

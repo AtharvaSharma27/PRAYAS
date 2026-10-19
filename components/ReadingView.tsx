@@ -128,6 +128,19 @@ export function ReadingView({
         </div>
       </article>
 
+      {/* Bottom Completion Action */}
+      <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+        <button
+          onClick={onFinishReading}
+          type="button"
+          className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl text-base font-semibold bg-indigo-600 hover:bg-indigo-700 text-white shadow-lg shadow-indigo-600/25 hover:shadow-indigo-600/35 active:scale-[0.99] transition-all focus-visible:ring-2 focus-visible:ring-indigo-500 cursor-pointer"
+          aria-label="I am done reading - proceed to writing"
+        >
+          <span>I’m done reading</span>
+          <ArrowRight className="w-5 h-5" />
+        </button>
+      </div>
+
       {/* Sub-note on copy deterrents */}
       <div className="mt-4 text-center text-xs text-slate-400 dark:text-slate-500">
         Copying, cutting, and text selection are restricted to encourage active cognitive encoding.

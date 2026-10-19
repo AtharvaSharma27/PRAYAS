@@ -27,9 +27,9 @@ export function WordCounter({
           className="inline-flex items-center gap-1 text-rose-600 dark:text-rose-400"
           aria-live="polite"
         >
-          <AlertCircle className="w-3.5 h-3.5" />
+          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
           <span>
-            {currentCount} words (need at least {min - currentCount} more)
+            {currentCount} words <span className="hidden sm:inline">(need at least {min - currentCount} more)</span><span className="sm:hidden">({min - currentCount} more)</span>
           </span>
         </span>
       ) : isOverMax ? (
@@ -37,9 +37,9 @@ export function WordCounter({
           className="inline-flex items-center gap-1 text-rose-600 dark:text-rose-400"
           aria-live="polite"
         >
-          <AlertCircle className="w-3.5 h-3.5" />
+          <AlertCircle className="w-3.5 h-3.5 shrink-0" />
           <span>
-            {currentCount} words (exceeds {max} word limit by {currentCount - max})
+            {currentCount} words <span className="hidden sm:inline">(exceeds {max} limit by {currentCount - max})</span><span className="sm:hidden">(+{currentCount - max})</span>
           </span>
         </span>
       ) : (
@@ -47,9 +47,9 @@ export function WordCounter({
           className="inline-flex items-center gap-1 text-emerald-600 dark:text-emerald-400"
           aria-live="polite"
         >
-          <CheckCircle2 className="w-3.5 h-3.5" />
+          <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
           <span>
-            {currentCount} words (valid range: {min}–{max})
+            {currentCount} words <span className="hidden sm:inline">(valid range: {min}–{max})</span><span className="sm:hidden">(valid)</span>
           </span>
         </span>
       )}
